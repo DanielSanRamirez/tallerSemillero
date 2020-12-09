@@ -3,8 +3,11 @@ package com.clearminds.dra.bdd;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.clearminds.dra.excepciones.BDDException;
 
 public class ConexionBDD {
 	
@@ -35,7 +38,7 @@ public class ConexionBDD {
 	private static String buscar(String linea, String nombrePropiedad) {
 		String p = null;
 		try {
-			String[] partes = linea.split(":");
+			String[] partes = linea.split(": ");
 			if (partes[0].equals(nombrePropiedad)) {
 				return partes[1];
 			} else {
@@ -44,6 +47,21 @@ public class ConexionBDD {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public static Connection obtenerConexion() throws BDDException{
+		Connection conn = null;
+		
+		String usuario = leerPropiedad("usuario");
+		String password = leerPropiedad("password");
+		String urlConexion = leerPropiedad("urlConexion");
+		
+		try {
+			conn = DriverManager.getConnection(urlConexion, usuario, password);
+			return conn;
+		} catch (SQLException e) {
+			throw new BDDException("No se pudo conectar a la base de datos");
 		}
 	}
 
