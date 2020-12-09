@@ -24,4 +24,13 @@ public class ServicioBase {
 			System.out.println("Error al cerrar la conexión");
 		}
 	}
+
+	public Connection getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(Connection conexion) {
+		this.conexion = conexion;
+	}
+
 }
