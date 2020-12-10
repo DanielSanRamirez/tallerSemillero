@@ -25,7 +25,13 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<version>8.2.0.jre8</version>
+			<version>9.1.1.jre8-preview</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.clearminds.dra</groupId>
+			<artifactId>model</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

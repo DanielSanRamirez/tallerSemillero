@@ -12,6 +12,9 @@ import com.clearminds.dra.excepciones.BDDException;
 public class ConexionBDD {
 	
 	public static String leerPropiedad(String nombrePropiedad) {
+		File f = new File("conexion.properties");
+		System.out.println("ruta: " + f.getAbsolutePath());
+		
 		File file = new File("D:\\CapacitacionCMC\\WorkspaceCMC\\tallerSemillero\\conexion.properties");
 		BufferedReader br = null;
 		FileReader fr = null;
@@ -55,12 +58,13 @@ public class ConexionBDD {
 		
 		String usuario = leerPropiedad("usuario");
 		String password = leerPropiedad("password");
-		String urlConexion = leerPropiedad("urlConexion");
+		String url = leerPropiedad("urlConexion") + ";user="+ usuario +";password=" + password;
 		
 		try {
-			conn = DriverManager.getConnection(urlConexion, usuario, password);
+			conn = DriverManager.getConnection(url);
 			return conn;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new BDDException("No se pudo conectar a la base de datos");
 		}
 	}
